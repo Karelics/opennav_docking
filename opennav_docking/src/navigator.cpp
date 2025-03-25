@@ -26,7 +26,7 @@ Navigator::Navigator(const rclcpp_lifecycle::LifecycleNode::WeakPtr & parent)
 {
   auto node = node_.lock();
   nav2_util::declare_parameter_if_not_declared(
-    parent, "navigator_bt_xml", rclcpp::ParameterValue(std::string("")));
+    node, "navigator_bt_xml", rclcpp::ParameterValue(std::string("")));
   node->get_parameter("navigator_bt_xml", navigator_bt_xml_);
 }
 
