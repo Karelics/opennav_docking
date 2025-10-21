@@ -31,6 +31,7 @@
 #include "opennav_docking/dock_database.hpp"
 #include "opennav_docking/navigator.hpp"
 #include "opennav_docking_core/charging_dock.hpp"
+#include "opennav_docking_core/wiggler.hpp"
 #include "tf2_ros/transform_listener.h"
 
 namespace opennav_docking
@@ -217,6 +218,19 @@ protected:
   void undockRobot();
 
   /**
+   * @brief Wiggle to search for the dock
+   * 
+   */
+   void wiggle();
+
+   /**
+    * @brief Get the Wiggler Plugin
+    * @param plugin_name Name of the plugin to load
+    * @return Shared pointer to the Wiggler plugin
+    */
+    std::shared_ptr<opennav_docking_core::Wiggler> getWigglerPlugin(const std::string & plugin_name); 
+
+  /**
    * @brief Callback executed when a parameter change is detected
    * @param event ParameterEvent message
    */
@@ -269,10 +283,15 @@ protected:
   std::unique_ptr<DockDatabase> dock_db_;
   std::unique_ptr<Navigator> navigator_;
   std::unique_ptr<Controller> controller_;
+  std::shared_ptr<opennav_docking_core::Wiggler> wiggler_;
   std::string curr_dock_type_;
 
   std::shared_ptr<tf2_ros::Buffer> tf2_buffer_;
   std::unique_ptr<tf2_ros::TransformListener> tf2_listener_;
+
+  pluginlib::ClassLoader<opennav_docking_core::Wiggler> wiggler_loader_{
+    "opennav_docking_core", "opennav_docking_core::Wiggler"
+  };
 };
 
 }  // namespace opennav_docking

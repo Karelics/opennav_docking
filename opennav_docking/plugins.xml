@@ -4,6 +4,11 @@
       <description>A simple charging dock plugin.</description>
     </class>
   </library>
+  <library path="wiggler">
+    <class type="opennav_docking::RotateInPlaceWiggler" base_class_type="opennav_docking_core::Wiggler">
+      <description>Wiggler plugin that rotates the robot in place to help with dock perception.</description>
+    </class>
+  </library>
   <library path="test_dock">
       <class type="opennav_docking::TestFailureDock"
             base_class_type="opennav_docking_core::ChargingDock">
