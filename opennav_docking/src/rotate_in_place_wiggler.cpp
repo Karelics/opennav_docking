@@ -32,7 +32,7 @@ void RotateInPlaceWiggler::wiggle()
   RCLCPP_INFO(node_->get_logger(), "Wiggling with angular velocity: %.2f", angular_velocity);
   vel_publisher_->publish(std::move(command));
 }
-}
+}  // namespace opennav_docking
 
 #include "pluginlib/class_list_macros.hpp"
 PLUGINLIB_EXPORT_CLASS(opennav_docking::RotateInPlaceWiggler, opennav_docking_core::Wiggler)

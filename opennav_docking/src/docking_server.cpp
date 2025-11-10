@@ -438,9 +438,8 @@ void DockingServer::doInitialPerception(Dock * dock, geometry_msgs::msg::PoseSta
   publishDockingFeedback(DockRobot::Feedback::INITIAL_PERCEPTION);
   rclcpp::Rate loop_rate(controller_frequency_);
   auto start = this->now();
-  auto timeout = rclcpp::Duration::from_seconds(initial_perception_timeout_ + 30.0);
+  auto timeout = rclcpp::Duration::from_seconds(initial_perception_timeout_);
 
-  RCLCPP_INFO(get_logger(), "Performing initial dock perception");
   while (!dock->plugin->getRefinedPose(dock_pose)) {
     if (wiggler_ && get_parameter("wiggle_for_initial_perception").as_bool()) {
       wiggler_->wiggle();
