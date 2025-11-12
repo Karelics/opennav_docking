@@ -106,9 +106,16 @@ ament_target_dependencies(simple_charging_dock
 )
 target_link_libraries(simple_charging_dock pose_filter)
 
+add_library(wiggler SHARED
+  src/rotate_in_place_wiggler.cpp
+)
+ament_target_dependencies(wiggler
+  ${dependencies}
+)
+
 pluginlib_export_plugin_description_file(opennav_docking_core plugins.xml)
 
-install(TARGETS ${library_name} controller pose_filter simple_charging_dock
+install(TARGETS ${library_name} controller pose_filter simple_charging_dock wiggler
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION bin
